@@ -5,14 +5,15 @@ import {
   Button,
 } from 'components/FeedbackOptions/FeedbackOptions.styled';
 
-export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
-  const keys = Object.keys(options);
+const options = ['good', 'neutral', 'bad'];
+
+export const FeedbackOptions = ({ onLeaveFeedback }) => {
   return (
     <List>
-      {keys.map(key => (
-        <Item key={key}>
-          <Button type="button" onClick={onLeaveFeedback}>
-            {key}
+      {options.map(option => (
+        <Item key={option}>
+          <Button type="button" onClick={() => onLeaveFeedback(option)}>
+            {option}
           </Button>
         </Item>
       ))}
@@ -21,6 +22,6 @@ export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
 };
 
 FeedbackOptions.propTypes = {
-  options: PropTypes.objectOf(PropTypes.number).isRequired,
+  options: PropTypes.arrayOf(PropTypes.string.isRequired),
   onLeaveFeedback: PropTypes.func.isRequired,
 };
